@@ -1,0 +1,55 @@
+package com.sontan.service;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.sontan.entity.User;
+
+public interface UserService {
+	//	登录验证
+	public User doLoginUser(User user);
+	
+	//商家登录验证
+	public User ShangJialoginUser(User user); 
+	
+	//用户注册
+	public int addRegister(@Param("account") String account, 
+			@Param("password")String password, 
+			@Param("username")String username, 
+			@Param("sex")String sex, 
+			@Param("phone")String phone, 
+			@Param("address")String address,
+			@Param("user_type_id")int user_type_id);
+	//商家注册
+	public int ShangJiaAddRegister(@Param("account") String account, 
+			@Param("password")String password, 
+			@Param("username")String username, 
+			@Param("sex")String sex, 
+			@Param("phone")String phone, 
+			@Param("address")String address,
+			@Param("user_type_id")int user_type_id);
+	
+	/*------------------------------zyt------------------------------*/	
+	//查询个人信息
+	public User queryUserInfoByAccount(@Param("account")String account);
+	
+	//修改个人信息
+	public void updateUserInfo(@Param("account") String account, 
+			@Param("password")String password, 
+			@Param("username")String username, 
+			@Param("sex")String sex, 
+			@Param("phone")String phone, 
+			@Param("address")String address);
+	
+	/*------------------------------zyt------------------------------*/	
+	
+	/*------------------------------hht------------------------------*/	
+	//查询商家个人信息
+	public User queryShangJiaInfoByAccount(@Param("account")String account);
+	//修改商家个人信息
+	public void updateShangJiaInfo(@Param("account") String account,@Param("password")String password, 
+			@Param("username")String username,@Param("sex")String sex,@Param("phone")String phone,
+			@Param("address")String address);	
+	/*------------------------------hht------------------------------*/	
+	
+	
+}

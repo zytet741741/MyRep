@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 映射类的文件路径 -->
+<mapper namespace="com.sontan.mapper.UserMapper">
+
+	<!-- 用户 登录验证 -->
+	<select id="loginUser" parameterType="com.sontan.entity.User" resultType="com.sontan.entity.User">
+		select * from user AS us, usertype AS ustype
+		WHERE 
+		account=#{account} 
+		AND 
+		password=#{password}
+		AND
+		us.user_type_id=ustype.id;
+	</select>
+	 
+	<!--商家登录验证 -->
+	<select id="ShangJialoginUser" parameterType="com.sontan.entity.User" resultType="com.sontan.entity.User">
+		select * from user AS us, usertype AS ustype
+		WHERE 
+		account=#{account} 
+		AND 
+		password=#{password}
+		AND
+		us.user_type_id=ustype.id;
+	</select>
+
+	
+
+<!-- 	注册账号密码 -->
+	<insert id="addRegister" parameterType="com.sontan.entity.User">
+		INSERT INTO `user`(account,password,username,sex,phone,address,user_type_id)
+		VALUES(#{account},#{password},#{username},#{sex},#{phone},#{address},#{user_type_id});
+	</insert>
+
+<!-- 	商家注册账号密码 -->
+	<insert id="ShangJiaAddRegister" parameterType="com.sontan.entity.User">
+		INSERT INTO `user`(account,password,username,sex,phone,address,user_type_id)
+		VALUES(#{account},#{password},#{username},#{sex},#{phone},#{address},#{user_type_id});
+	</insert>
+
+
+	<!-- 增加 -->
+<!-- 	<insert id="insertUser" parameterType="com.sontan.entity.User">
+		<selectKey keyProperty="id" order="AFTER"
+			resultType="String">
+			select last_insert_id()
+		</selectKey>
+		insert into User (id,account,username,pwd,sex,phone,address) values
+		
+		(#{id},#{account},#{username},#{pwd},#{sex},#{phone},#{address})
+	</insert> -->
+
+	<!-- ******************************zyt****************************** -->
+	<!-- 查询个人信息 -->
+	<select id="queryUserInfoByAccount" parameterType="String" resultType="com.sontan.entity.User">
+		select account,password,username,sex,phone,address,head_image  		
+		FROM user
+		WHERE
+		account = #{account} 
+	</select>
+	
+	<!-- 修改个人信息 -->
+	<update id="updateUserInfo" parameterType="com.sontan.entity.User">
+		update user set 
+			password = #{password},
+			username = #{username},
+			sex = #{sex},
+			phone = #{phone},
+			address = #{address}
+		where account = #{account}
+	</update>
+	
+	<!-- ******************************zyt****************************** -->
+	
+	<!-- ******************************hht****************************** -->
+	<!-- 查询商家信息 -->
+	<select id="queryShangJiaInfoByAccount" parameterType="String" resultType="com.sontan.entity.User">
+		select * FROM user WHERE account = #{account}
+	</select>
+	
+	<!-- 修改商家个人信息 -->
+	<update id="updateShangJiaInfo" parameterType="com.sontan.entity.User">
+		update user set 
+			password = #{password},
+			username = #{username},
+			sex = #{sex},
+			phone = #{phone},
+			address = #{address}
+		where account = #{account}
+	</update>
+	
+	<!-- ******************************hht****************************** -->
+
+</mapper>

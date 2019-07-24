@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 映射类的文件路径 -->
+<mapper namespace="com.sontan.mapper.GoodsMapper">
+	
+		<resultMap id="GoodResultMap" type="com.sontan.entity.Good">
+			<id column="id" jdbcType="INTEGER" property="id" />
+			<result column="good_type_id" jdbcType="INTEGER" property="good_type_id" />
+			<result column="good_name" jdbcType="VARCHAR" property="good_name" />
+			<result column="good_name" jdbcType="VARCHAR" property="good_name" />
+			<result column="good_content" jdbcType="VARCHAR" property="good_content" />
+			<result column="good_price" jdbcType="VARCHAR" property="good_price" />
+			<result column="good_image" jdbcType="VARCHAR" property="good_image" />	
+			<association property="order" resultMap="OrderResultMap"></association>
+			<association property="orderType" resultMap="OrderTypeResultMap"></association>	 	 
+		</resultMap>  
+		
+		<resultMap  id="OrderResultMap" type="com.sontan.entity.Order" >
+			<id column="id" jdbcType="INTEGER" property="id" />
+			<result column="good_name" jdbcType="VARCHAR" property="good_name" />
+			<result column="good_price" jdbcType="VARCHAR" property="good_price" />
+			<result column="good_image" jdbcType="VARCHAR" property="good_image" />
+			<result column="user_account" jdbcType="VARCHAR" property="user_account" />
+			<result column="good_number" jdbcType="INTEGER" property="good_number" />
+			<result column="good_total_price" jdbcType="INTEGER" property="good_total_price" />
+			<result column="order_type_id" jdbcType="INTEGER" property="order_type_id" />
+			<result column="evaluated" jdbcType="VARCHAR" property="evaluated" />
+		</resultMap> 
+		
+		<resultMap id="OrderTypeResultMap" type="com.sontan.entity.OrderType" >
+			<id column="id" jdbcType="INTEGER" property="id" />
+			<result column="order_status_name" jdbcType="VARCHAR" property="order_status_name" />
+		</resultMap> 
+		
+	 
+<!-- / 		查询所有订单 -->
+	<select id="selectAllSale" parameterType="com.sontan.entity.Order" 
+	resultMap="GoodResultMap"> 
+		SELECT od.id,od.good_name,od.good_price,
+		od.good_image,od.good_number,od.good_total_price,
+		od.order_type_id,od.user_account,odtype.order_status_name 
+		FROM `order` as od,ordertype AS odtype
+		WHERE
+		user_account = #{user_account}
+		AND
+		od.order_type_id=odtype.id;
+
+	</select>
+	
+<!-- 	查询待付款订单 -->
+<select id="selectUnpay" parameterType="com.sontan.entity.Order" 
+	resultMap="GoodResultMap"> 
+		SELECT od.id,od.good_name,od.good_price,
+		od.good_image,od.good_number,od.good_total_price,
+		od.order_type_id,odtype.order_status_name,od.user_account
+		FROM `order` as od,ordertype AS odtype
+		WHERE
+		user_account = #{user_account}
+		AND
+		odtype.id=1
+		AND
+		od.order_type_id=odtype.id;
+</select>
+
+<!-- 查询待发货 -->
+<select id="selectUnshiped" parameterType="com.sontan.entity.Order" 
+	resultMap="GoodResultMap"> 
+		SELECT od.id,od.good_name,od.good_price,
+		od.good_image,od.good_number,od.good_total_price,
+		od.order_type_id,odtype.order_status_name ,od.user_account
+		FROM `order` as od,ordertype AS odtype
+		WHERE
+		user_account = #{user_account}
+		AND
+		odtype.id=2
+		AND
+		od.order_type_id=odtype.id;
+</select>
+
+<!-- 查询待收货 -->
+<select id="selectReceived" parameterType="com.sontan.entity.Order" 
+	resultMap="GoodResultMap"> 
+		SELECT od.id,od.good_name,od.good_price,
+		od.good_image,od.good_number,od.good_total_price,
+		od.order_type_id,odtype.order_status_name ,od.user_account
+		FROM `order` as od,ordertype AS odtype
+		WHERE
+		user_account = #{user_account}
+		AND
+		odtype.id=3
+		AND
+		od.order_type_id=odtype.id;
+</select>
+
+<!-- 查询待评价 -->
+<select id="selectEvaluated" parameterType="com.sontan.entity.Order" 
+	resultMap="GoodResultMap"> 
+		SELECT od.id,od.good_name,od.good_price,
+		od.good_image,od.good_number,od.good_total_price,
+		od.order_type_id,odtype.order_status_name ,od.user_account
+		FROM `order` as od,ordertype AS odtype
+		WHERE
+		user_account = #{user_account}
+		AND
+		odtype.id=4
+		AND
+		od.order_type_id=odtype.id;
+</select>
+
+	<!-- 立即付款完成 toPay -->
+	<update id="toPay" parameterType="com.sontan.entity.Order">
+		UPDATE `order` 
+		SET
+		 `order`.`order_type_id` = 2
+		WHERE
+		`order`.id = #{orderId};
+	</update>
+	
+	<!-- 确认收货 -->
+	<update id="toReceived" parameterType="com.sontan.entity.Order">
+		UPDATE `order` 
+		SET
+		 `order`.`order_type_id` = 4
+		WHERE
+		`order`.id = #{orderId};
+	</update>
+	
+<!-- 	去评价界面 -->
+	<select id="selectEvaluatedById" parameterType="com.sontan.entity.Order" 
+		resultMap="GoodResultMap">
+			SELECT *from `order`
+			WHERE
+			`order`.id = #{orderId}
+			AND
+			`order`.user_account=#{user_account}
+			;
+	</select>
+<!-- 	立即评价 -->
+	<update id="addEvaluated" parameterType="com.sontan.entity.Order">
+		UPDATE `order` SET evaluated = #{evaluated},order_type_id = 5
+		where id= #{orderId};
+	</update>
+	
+										<!-- zyt -->
+<!-- 查询所有商品 -->
+<select id="selectAllGood" resultType="com.sontan.entity.Good">
+		select * from good
+</select>
+
+<!-- 查询商品信息 -->
+	<select id="queryGoodInfoByName" resultType="com.sontan.entity.Good">
+		select 
+			good_image,
+			good_name,
+			good_content,
+			good_price 		
+		FROM good
+		WHERE
+		good_name = #{good_name}
+	</select>
+	
+	<!-- 查询购物车 -->
+	<select id="selectShopCar" resultType="com.sontan.entity.Shop">
+		select * from shop 
+	</select>
+	
+		<select id="selectShopCar2" resultType="com.sontan.entity.Shop">
+		select * from shop  where user_account = #{user_account};
+	</select>
+	
+	<!-- 添加购物车商品 -->
+	<insert id="addInCar" parameterType="com.sontan.entity.Shop">
+		insert into shop ( good_name,good_price,good_content,good_image,user_account,number ) 
+		values ( #{good_name},#{good_price},#{good_content},#{good_image},#{user_account},#{number} )
+	</insert>
+	
+	<!-- 删除购物车商品 -->
+	<delete id="delCarGood" parameterType="com.sontan.entity.Shop">
+		delete from shop where good_name = #{good_name}
+	</delete>
+	
+	<!-- 添加订单商品 -->
+	<insert id="addInOrder" parameterType="com.sontan.entity.Order">
+		insert into `order` ( good_name,good_price,good_image,user_account,good_number,good_total_price,order_type_id ) 
+		values ( #{good_name},#{good_price},#{good_image},#{user_account},#{number},#{good_total_price},#{order_type_id} )
+	</insert>
+
+
+
+	<!-- hht -->
+	<!-- 查询所有商品 -->
+	<select id="findAllGoods" resultType="com.sontan.entity.Good">
+		 select * from good 
+		<!-- SELECT 
+		gt.good_type_name,
+		gd.good_name,
+		gd.good_content,
+		gd.good_price,
+		gd.good_image 
+		FROM good AS gd,goodtype AS gt 
+		WHERE 
+		gd.good_type_id = gt.id -->
+		
+	</select>
+	
+	<!-- 通过名字查询商品信息 -->
+	<select id="findGoodInfoByName" parameterType="String" resultType="com.sontan.entity.Good">
+		SELECT 
+		gd.id,
+		gt.good_type_name,
+		gd.good_type_id,
+		gd.good_name,
+		gd.good_content,
+		gd.good_price,
+		gd.good_image 
+		FROM good AS gd,goodtype AS gt 
+		WHERE 
+		gd.good_type_id = gt.id 
+		AND good_name = #{good_name} 
+	</select>
+	
+	<!-- 修改商品信息 -->
+	<update id="updateGoodsInfo" parameterType="com.sontan.entity.Good">
+		UPDATE good SET good_content = #{good_content},good_price = #{good_price} WHERE good_name= #{good_name}
+	</update>
+	
+	
+	<!-- 删除商品 -->
+	<delete id="delGood" parameterType="com.sontan.entity.Good">
+		delete from good where good_name = #{good_name}
+	</delete>
+	
+	<!-- 增加商品 -->
+	<insert id="addGood" parameterType="com.sontan.entity.Good">
+		INSERT INTO good(good_type_id,good_name,good_content,good_price,good_image) 
+		VALUES( #{good_type_id},#{good_name},#{good_content},#{good_price},#{good_image})
+	</insert>
+
+
+</mapper>

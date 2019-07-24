@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.myapplication">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".FirstActivity"
+            android:label="Test" />
+        <activity
+            android:name=".DetailActivity"
+            android:theme="@style/DetailActivityTheme" />
+        <activity android:name=".loginActicity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".NavigationActivity" />
+        <activity android:name=".UnPayActivity" />
+        <activity android:name=".UnshipedActivity" />
+        <activity android:name=".UnShipActivity" />
+        <activity android:name=".UnReceivedActivity" />
+        <activity android:name=".UnEvaluatedActivity" />
+        <activity android:name=".AllSaleActivity" />
+        <activity android:name=".EvalutedActivity" />
+
+        <!--zyt-->
+        <activity android:name=".GoodListActivity" />
+        <activity android:name=".GoodInfoActivity" />
+        <activity android:name=".UserInfoActivity" />
+        <activity android:name=".UpdateUIActivity" />
+        <activity android:name=".ShopCarActivity" />
+        <activity android:name=".MyselfActivity"/>
+
+        <!--hht-->
+        <activity android:name=".FindGoodInfoActivity" />
+        <activity android:name=".GoodInfoChangeActivity" />
+        <activity android:name=".FindAllGoodActivity" />
+        <activity android:name=".AddGoodActivity" />
+        <activity android:name=".EditShangJiaActivity"/>
+        <activity android:name=".FindShangJiaInfoActivity"/>
+    </application>
+
+</manifest>

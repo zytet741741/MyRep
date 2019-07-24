@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/activity_find_all_goods"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:paddingBottom="@dimen/activity_vertical_margin"
+android:paddingLeft="@dimen/activity_horizontal_margin"
+android:paddingRight="@dimen/activity_horizontal_margin"
+android:paddingTop="@dimen/activity_vertical_margin"
+tools:context="com.example.myapplication.FindAllGoodActivity"
+android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="110px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:textSize="15dp"
+            android:text="图片"
+            />
+        <TextView
+            android:layout_width="50px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:textSize="15dp"
+            android:text="名称"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:textSize="15dp"
+            android:text="价格"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:textSize="15dp"
+            android:text="操作"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:textSize="15dp"
+            android:text="操作"
+            />
+    </LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="-------------------------------------------------------------------------------------------------"
+        android:layout_weight="1"
+        android:textColor="#FFC0CB"
+        />
+
+
+</LinearLayout>
+
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/AllGoods_list"
+    android:layout_width="360dp"
+    android:layout_height="420dp"
+    >
+</android.support.v7.widget.RecyclerView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        >
+        <ImageView
+            android:id="@+id/findallgood_addg"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/tianjia6"
+            android:layout_weight="1"
+            />
+        <ImageView
+            android:id="@+id/findallgood_allgood"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/all_good"
+            android:layout_weight="1"
+            />
+        <ImageView
+            android:id="@+id/findallgood_usifo"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/myself_two"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

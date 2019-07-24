@@ -1,0 +1,152 @@
+
+
+/* 头部样式 */
+
+.l-ul>li, .r-ul>li {
+    float: left;
+    font-size: 12px;
+    color: #6c6c6c;
+    position: relative;
+}
+
+.r-ul {
+    float: right;
+}
+
+.header {
+    background-color: #f5f5f5;
+    box-shadow: 0 0 1px #9b9b9b;
+    text-align: center;
+}
+
+.l-ul>li:hover, .r-ul>li:hover {
+    background-color: #ffffff;
+    color: rgb(245, 39, 39);
+}
+
+.l-ul>li:hover>ul, .r-ul>li:hover>ul {
+    display: inline;
+    color: #6c6c6c;
+    padding-left: 20px;
+    line-height: 20px;
+}
+
+/* 搜索框 */
+
+.sreach {
+    padding: 10px;
+    text-align: center;
+}
+
+/* logo样式 */
+
+.s-logo {}
+
+.s-input {
+    font-size: 0;
+    position: relative;
+}
+
+[name='sreach'], [ type="submit"] {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+[name='sreach'] {
+    font-size: 16px;
+    width: 300px;
+    color: #575555;
+    outline: none;
+}
+
+.s-sreach {
+    display: inline-block;
+    border: #f14e1c 1px solid;
+    border-right: none;
+    padding: 6.6px 0px;
+    padding-left: 20px;
+    position: relative;
+    box-sizing: border-box;
+    vertical-align: middle
+    
+}
+
+[type="submit"] {
+    font-size: 18px;
+    padding: 5px 20px;
+    color: #ffffff;
+    background: #f14e1c;
+    vertical-align: middle;
+    position: relative;
+}
+
+/* 数据部分 */
+
+/* 商品css */
+
+.commodity {
+    width: 250px;
+    padding: 10px 15px;
+    border: #e0e0e0 1px solid;
+    box-sizing: border-box;
+    float: left;
+    margin-right: 9.5px;
+    margin-bottom: 20px;
+}
+
+.commodity>a>span {
+    display: block;
+    width: 220px;
+    height: 220px;
+    /* background: red; */
+}
+.price-box{
+    padding-top: 20px; 
+}
+
+.price{
+    font-size: 17px;
+    color: #f14e1c;
+
+}
+.price>strong{
+   margin: 0;
+   padding: 0;
+}
+.postalicon{
+    font-size: 12px;
+    background-color: #f14e1c;
+    color: #ffffff;
+}
+.commodity>a>.c-title{
+    width: 100%;
+    overflow: hidden;
+    font-size: 12px;
+    padding: 10px 0px;
+}
+.shopName{
+    padding: 10px 0px;
+    font-size: 14px;
+    color: #9b9b9b;
+}
+.shopName>.shopNick{
+    float: left;
+    text-decoration: underline;
+}
+.shopName>.payNum{
+    float: right;
+}
+.gouwu{
+    padding-top: 20px;
+    text-align: center;
+}
+.gouwu-btn{
+    border: 0;
+    background: #fa3f3f;
+    width: 100%;
+    font-size: 20px;
+    color: #ffffff;
+    border-radius: 2px;
+    box-shadow: 0 0 2px #a3a2a2;
+}
